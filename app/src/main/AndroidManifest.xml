@@ -16,8 +16,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditPostActivity" />
-        <activity android:name=".MyPosts"></activity>
+        <activity android:name=".EditPostActivity"
+            android:label="Medium_CS179K"  >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW"/>-->
+            <!--</intent-filter>-->
+
+        </activity>
+        <activity android:name=".BrowserActivity"
+            android:label="Medium_CS179K"  android:theme="@style/AppTheme">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.VIEW"/>-->
+            <!--</intent-filter>-->
+
+        </activity>
+
     </application>
 
 </manifest>
