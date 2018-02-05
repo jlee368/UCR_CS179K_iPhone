@@ -87,6 +87,10 @@ public class BrowserActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame, new SecondFragment()).commit();
         } else if (id == R.id.nav_third_layout) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ThirdFragment()).commit();
+        }else if (id == R.id.nav_bookmark) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new BookMarkFragment()).commit();
+        }else if (id == R.id.nav_setting_layout) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new SettingFragment()).commit();
         }
 
 //        } else if (id == R.id.nav_manage) {
