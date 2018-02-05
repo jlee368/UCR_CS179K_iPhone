@@ -1,5 +1,6 @@
 package com.example.judy.medium_cs179k;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity
                 {
                     //user is signed in
                     Toast.makeText(MainActivity.this, "You are now signed in", Toast.LENGTH_LONG).show();
+//                    Intent intent = new Intent(getApplicationContext(), MyPosts.class);
+//                    startActivity(intent);
                 }
                 else
                 {
