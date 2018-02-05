@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity// implements View.OnClickLis
                 {
                     //user is signed in
                     Toast.makeText(MainActivity.this, "You are now signed in", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), BrowserActivity.class);
+                    startActivity(intent);
                 }
                 else
                 {
