@@ -11,5 +11,7 @@
         android:layout_marginTop="109dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Notification_Layout" />
+        android:text="Setting_layout" />
 </RelativeLayout>
+
+<!--THis is going to be about photo-->
