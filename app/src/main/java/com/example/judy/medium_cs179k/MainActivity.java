@@ -22,6 +22,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity// implements View.OnClickListener
 {
 
+    private String mUsername;
     private static int RC_SIGN_IN = 1;      //request code flag for when we return from starting the activity
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;       //references specific part of the database
@@ -29,29 +30,15 @@ public class MainActivity extends AppCompatActivity// implements View.OnClickLis
     private FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    public static final String ANONYMOUS = "anonymous";
+
+
 //    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button browsebtn = findViewById(R.id.button2);
-        browsebtn.setOnClickListener(new View.OnClickListener()
-                                     {
-                                                 @Override
-                                         public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.button2:
-                                             Toast.makeText(getApplicationContext(),
-                                                     "Testing", Toast.LENGTH_SHORT).show();
 
-                                             Intent intent = new Intent(getApplicationContext() , BrowserActivity.class);
-                                             startActivity(intent);
-//                break;
-                                         }
-    });
-
-
-//    }
-//
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         mFirebaseAuth = FirebaseAuth.getInstance();
 
@@ -64,13 +51,14 @@ public class MainActivity extends AppCompatActivity// implements View.OnClickLis
                 if(user != null)
                 {
                     //user is signed in
-                    Toast.makeText(MainActivity.this, "You are now signed in", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(getApplicationContext(), BrowserActivity.class);
-                    startActivity(intent);
+                    onSignedInInitalize(user.getDisplayName());
+                    Intent intent = new Intent(MainActivity.this, BrowserActivity.class);
+                    MainActivity.this.startActivity(intent);
                 }
                 else
                 {
                     //user is signed out
+                    onSignedOutCleanUp();
                     startActivityForResult(
                             AuthUI.getInstance()
                                     .createSignInIntentBuilder()
@@ -83,25 +71,48 @@ public class MainActivity extends AppCompatActivity// implements View.OnClickLis
                 }
             }
         };
-
     }
-//================Judy's test code=====================================================
-    //this is to test out the navigation bar for user ui
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == RC_SIGN_IN)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                Toast.makeText(this, "Signed IN", Toast.LENGTH_LONG).show();
+            }
+            else if (resultCode == RESULT_CANCELED)
+            {
+                Toast.makeText(this, "Signed IN cancelled", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+    }
 
-//=====================================================================================
-//    @Override
-//    protected void onPause()
-//    {
-//        super.onPause();
-//        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
-//    }
-//
-//    @Override
-//    protected void onResume()
-//    {
-//        super.onResume();
-//        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-//    }
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        mFirebaseAuth.removeAuthStateListener(mAuthStateListener);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+    }
+
+    private void onSignedInInitalize(String username)
+    {
+        mUsername = username;
+    }
+
+    private void onSignedOutCleanUp()
+    {
+        mUsername = ANONYMOUS;
+    }
 
 }

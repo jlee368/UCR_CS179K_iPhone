@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BrowserActivity"
+        <activity android:name=".MainActivity"
             android:label="Medium_CS179K"  android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,13 +24,13 @@
             <!--</intent-filter>-->
 
         </activity>
-        <!--<activity android:name=".BrowserActivity"-->
-            <!--android:label="Medium_CS179K"  android:theme="@style/AppTheme">-->
+        <activity android:name=".BrowserActivity"
+            android:label="Medium_CS179K"  android:theme="@style/AppTheme">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.VIEW"/>-->
             <!--</intent-filter>-->
 
-        <!--</activity>-->
+        </activity>
 
     </application>
 
